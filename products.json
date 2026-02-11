@@ -1,29 +1,26 @@
 [
   {
-    "title": "Wreath Embroidery Design (Sample)",
-    "desc": "Demo ürün — FastSpring linkini buyUrl alanına koyunca satış başlar.",
-    "price": "$3.99",
-    "badge": "WREATH",
-    "tags": ["wreath", "embroidery", "digital file"],
-    "detailsUrl": "https://www.embroiderydesignmachine.com",
-    "buyUrl": ""
+    "id": 1,
+    "name": "Floral Wreath Embroidery Design",
+    "price": 3.99,
+    "image": "https://picsum.photos/seed/emb1/500/500",
+    "formats": "DST, PES, JEF, VP3, XXX",
+    "buyUrl": "https://your-fastpring-link.com"
   },
   {
-    "title": "Flower Embroidery Design (Sample)",
-    "desc": "İstersen kategori/filtre/ürün sayfası ekleriz.",
-    "price": "$2.99",
-    "badge": "FLOWER",
-    "tags": ["flower", "machine embroidery", "instant download"],
-    "detailsUrl": "https://www.embroiderydesignmachine.com",
-    "buyUrl": ""
+    "id": 2,
+    "name": "Cute Bear Embroidery Design",
+    "price": 4.49,
+    "image": "https://picsum.photos/seed/emb2/500/500",
+    "formats": "DST, PES, JEF, VP3, XXX",
+    "buyUrl": "https://your-fastpring-link.com"
   },
   {
-    "title": "Animal Embroidery Design (Sample)",
-    "desc": "Bu yapı hızlı demo içindir. Sonra gerçek storefront'a evrilir.",
-    "price": "$4.49",
-    "badge": "ANIMAL",
-    "tags": ["animal", "dst pes jef", "pattern"],
-    "detailsUrl": "https://www.embroiderydesignmachine.com",
-    "buyUrl": ""
+    "id": 3,
+    "name": "Rose Flower Embroidery Design",
+    "price": 2.99,
+    "image": "https://picsum.photos/seed/emb3/500/500",
+    "formats": "DST, PES, JEF, VP3, XXX",
+    "buyUrl": "https://your-fastpring-link.com"
   }
 ]
