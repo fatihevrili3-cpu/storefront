@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Wreath Embroidery Design (Sample)",
+    "desc": "Demo ürün — FastSpring linkini buyUrl alanına koyunca satış başlar.",
+    "price": "$3.99",
+    "badge": "WREATH",
+    "tags": ["wreath", "embroidery", "digital file"],
+    "detailsUrl": "https://www.embroiderydesignmachine.com",
+    "buyUrl": ""
+  },
+  {
+    "title": "Flower Embroidery Design (Sample)",
+    "desc": "İstersen kategori/filtre/ürün sayfası ekleriz.",
+    "price": "$2.99",
+    "badge": "FLOWER",
+    "tags": ["flower", "machine embroidery", "instant download"],
+    "detailsUrl": "https://www.embroiderydesignmachine.com",
+    "buyUrl": ""
+  },
+  {
+    "title": "Animal Embroidery Design (Sample)",
+    "desc": "Bu yapı hızlı demo içindir. Sonra gerçek storefront'a evrilir.",
+    "price": "$4.49",
+    "badge": "ANIMAL",
+    "tags": ["animal", "dst pes jef", "pattern"],
+    "detailsUrl": "https://www.embroiderydesignmachine.com",
+    "buyUrl": ""
+  }
+]
