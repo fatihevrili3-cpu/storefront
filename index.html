@@ -3,21 +3,134 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vitrin</title>
+  <title>Embroidery Design Machine | Demo Store</title>
   <style>
-    body{font-family:Arial,system-ui;display:grid;place-items:center;min-height:100vh;margin:0}
-    .box{max-width:720px;padding:28px;border:1px solid #e5e7eb;border-radius:14px}
-    h1{margin:0 0 10px}
-    p{margin:0 0 14px;color:#374151}
-    a{display:inline-block;padding:10px 14px;border-radius:10px;background:#111;color:#fff;text-decoration:none}
+    :root { --b:#111; --g:#e9eef5; --t:#374151; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,system-ui;background:#fff;color:var(--b)}
+    header{border-bottom:1px solid #eef2f7;background:#fff;position:sticky;top:0;z-index:5}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .pill{display:inline-flex;gap:8px;align-items:center;border:1px solid #e5e7eb;border-radius:999px;padding:8px 12px}
+    input{border:none;outline:none;min-width:220px}
+    .btn{display:inline-block;background:#111;color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px}
+    .btn2{display:inline-block;border:1px solid #111;color:#111;text-decoration:none;padding:10px 14px;border-radius:10px;background:#fff}
+    main{background:linear-gradient(180deg,#fff, #fafcff)}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center;padding:26px 0}
+    .card{border:1px solid #e5e7eb;border-radius:16px;padding:16px;background:#fff;box-shadow:0 8px 24px rgba(17,24,39,.06)}
+    .muted{color:var(--t);line-height:1.5}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}}
+    .pimg{height:160px;border-radius:12px;background:var(--g);display:flex;align-items:center;justify-content:center;font-weight:700;color:#64748b}
+    .row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:10px}
+    .tag{font-size:12px;border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;color:#334155}
+    footer{border-top:1px solid #eef2f7}
+    .small{font-size:12px;color:#6b7280;line-height:1.5}
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>Vitrin site yayında ✅</h1>
-    <p>Bir sonraki adım: buraya mağaza tasarımını ekleyeceğiz.</p>
-    <a href="#">Ürünlere Git</a>
+<header>
+  <div class="wrap top">
+    <div class="brand">Embroidery Design Machine — Demo Store</div>
+    <div class="pill">
+      🔎 <input id="q" placeholder="Ara: flower, wreath, animal..." />
+    </div>
+    <a class="btn2" href="https://www.embroiderydesignmachine.com" target="_blank" rel="noreferrer">Ana Site</a>
   </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <h1 style="margin:0 0 8px">Makine Nakışı Dijital Dosyalar</h1>
+      <div class="muted">
+        Bu demo mağaza Cloudflare Pages üzerinde çalışır. Ödeme FastSpring üzerinden alınır.
+        İstersen burayı zamanla gerçek “storefront” gibi büyütürüz (kategori, arama, filtre, ürün sayfası vb.).
+      </div>
+      <div class="row" style="margin-top:14px">
+        <span class="tag">Instant Download</span>
+        <span class="tag">DST / PES / JEF / VP3 / XXX</span>
+        <span class="tag">Ticari kullanım: mağaza kurallarına göre</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:8px">Hızlı Ayar</div>
+      <div class="small">
+        1) Ürünleri <b>products.json</b> içine ekle<br/>
+        2) FastSpring ürün linkini <b>buyUrl</b> alanına koy<br/>
+        3) Commit → Pages otomatik yayınlar
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn" href="#products">Ürünleri Gör</a>
+        <a class="btn2" href="https://dashboard.cloudflare.com/" target="_blank" rel="noreferrer">Cloudflare</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" id="products" style="padding-bottom:30px">
+    <h2 style="margin:0 0 10px">Ürünler</h2>
+    <div id="list" class="grid"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap small" style="padding:18px 16px">
+    © <span id="y"></span> Embroidery Design Machine — Demo Storefront (Cloudflare Pages)<br/>
+    Not: Bu demo “statik”tir; gerçek Laravel e-ticaret altyapısı Pages’te çalışmaz. İstersen gerçek siteyi mevcut hostta tutup,
+    bu sayfayı sadece vitrin/landing + FastSpring ödeme köprüsü yaparız.
+  </div>
+</footer>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  async function load(){
+    const res = await fetch("./products.json", {cache:"no-store"});
+    const items = await res.json();
+
+    const q = document.getElementById("q");
+    const list = document.getElementById("list");
+
+    function render(){
+      const term = (q.value||"").toLowerCase().trim();
+      const filtered = items.filter(x =>
+        !term || (x.title + " " + (x.tags||[]).join(" ")).toLowerCase().includes(term)
+      );
+
+      list.innerHTML = filtered.map(x => `
+        <div class="card">
+          <div class="pimg">${x.badge || "PREVIEW"}</div>
+          <div style="margin-top:10px;font-weight:800">${x.title}</div>
+          <div class="muted" style="font-size:13px;margin-top:6px">${x.desc || ""}</div>
+          <div class="row">
+            <div style="font-weight:800">${x.price || ""}</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn2" href="${x.detailsUrl || '#'}" ${x.detailsUrl ? 'target="_blank" rel="noreferrer"' : ''}>Detay</a>
+              <a class="btn" href="${x.buyUrl || '#'}" ${x.buyUrl ? 'target="_blank" rel="noreferrer"' : ''}>Satın Al</a>
+            </div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+            ${(x.tags||[]).slice(0,6).map(t=>`<span class="tag">${t}</span>`).join("")}
+          </div>
+        </div>
+      `).join("");
+
+      if(!filtered.length){
+        list.innerHTML = `<div class="card" style="grid-column:1/-1"><b>Sonuç yok.</b> Arama terimini değiştir.</div>`;
+      }
+    }
+
+    q.addEventListener("input", render);
+    render();
+  }
+
+  load().catch(err=>{
+    document.getElementById("list").innerHTML =
+      `<div class="card" style="grid-column:1/-1"><b>products.json okunamadı.</b><div class="small">${err}</div></div>`;
+  });
+</script>
 </body>
 </html>
-<!-- update -->
